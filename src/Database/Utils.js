@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const connectToMongo = async () => {
-  await mongoose.connect(
-    "mongodb+srv://1020dudu:du10du20@devclobdb.g5qwfzk.mongodb.net/?retryWrites=true&w=majority&appName=devClobDB"
-  );
+  await mongoose.connect(process.env.DB_URL);
   console.log("Connected successfully to database");
 };

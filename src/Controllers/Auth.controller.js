@@ -1,4 +1,5 @@
 import AuthService from "../Services/Auth.service.js";
+import passport from "passport";
 
 const register = async (req, res) => {
   const { email, password, username } = req.body;
@@ -24,4 +25,21 @@ const register = async (req, res) => {
   }
 };
 
-export default { register };
+const login = async (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (!user) {
+      return res.status(401).json({ error: info.message });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      return res.status(200).json({ message: "Logged in successfully" });
+    });
+  })(req, res, next);
+};
+
+export default { register, login };

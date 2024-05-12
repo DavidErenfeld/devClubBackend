@@ -17,7 +17,7 @@ const registerUser = async (user) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = await UserModel.create({
-      username: username, // Make sure this matches your schema field
+      username: username,
       email: email,
       password: hashedPassword,
     });
