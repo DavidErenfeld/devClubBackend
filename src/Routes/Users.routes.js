@@ -7,11 +7,12 @@ import {
   updateUserByUserId,
   deleteUserByUserId,
 } from "../Controllers/Users.controller.js";
+import AuthMiddleware from "../Middleware/AuthMiddleware.js";
 
-router.get("/", getAllUsers);
+router.get("/", AuthMiddleware, getAllUsers);
 router.get("/:id", getUserByUserId);
 router.post("/", createUser);
-router.put("/:id", updateUserByUserId);
+router.put("/:id", AuthMiddleware, updateUserByUserId);
 router.delete("/:id", deleteUserByUserId);
 
 export default router;

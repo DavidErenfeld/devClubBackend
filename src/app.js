@@ -14,24 +14,9 @@ const app = express();
 
 app.use(express.json());
 connectToMongo();
-app.use(express.urlencoded({ extended: false }));
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(passport.initialize());
-app.use(flash());
-app.use(passport.session());
-
-initializePassport(passport);
 
 app.use("/users", usersRouter);
 app.use("/courses", coursesRouter);
 app.use("/auth", authRouter);
-app.get("/login", (req, res) => {
-  res.send(req.body);
-});
+
 export default app;

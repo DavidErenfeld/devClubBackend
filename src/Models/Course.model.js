@@ -10,6 +10,11 @@ const courseSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
+  finishDate: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
   courseName: {
     type: String,
     required: true,
@@ -24,18 +29,18 @@ const courseSchema = new mongoose.Schema({
     min: 0,
     max: 100,
   },
-  studyDaysPerWeek: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 7,
-  },
   courseTopics: {
     type: [String],
     required: true,
   },
   examDate: {
     type: Date,
+  },
+  studyDaysPerWeek: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 7,
   },
   preferredStudyDays: {
     type: [Number],
@@ -47,6 +52,7 @@ const courseSchema = new mongoose.Schema({
       message: "Array size must match the number of study days per week",
     },
   },
+  //hours: Number
 });
 
 const CourseModel = mongoose.model("Course", courseSchema);

@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  //age, country
   courses: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,6 +29,15 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  tokens: {
+    type: [String],
+    required: false,
+  },
+  authType: {
+    type: String,
+    required: true,
+    default: "application", // Default value for users registered through the application
+  },
 });
 
 const UserModel = mongoose.model("User", userSchema);
